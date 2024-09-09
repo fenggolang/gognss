@@ -121,7 +121,8 @@ func ExampleNavDecoder_loop() {
 
 func TestNavDecoder_EphemeridesFromFile(t *testing.T) {
 	assert := assert.New(t)
-	filepath := "testdata/white/AREG00PER_R_20201690000_01D_MN.rnx"
+	// filepath := "testdata/white/AREG00PER_R_20201690000_01D_MN.rnx"
+	filepath := "testdata/white/TEST1-20240828.nav"
 	r, err := os.Open(filepath)
 	assert.NoError(err)
 	defer r.Close()
@@ -137,7 +138,7 @@ func TestNavDecoder_EphemeridesFromFile(t *testing.T) {
 		switch typ := eph.(type) {
 		case *EphGPS:
 			nGPS++
-			fmt.Printf("GPS Eph: %v\n", eph)
+			fmt.Printf("GPS Eph: %+v\n", eph)
 		case *EphGLO:
 			nGLO++
 			fmt.Printf("GLONASS Eph: %v\n", eph)
@@ -254,7 +255,7 @@ Concatenated RINEX files (6)                                COMMENT
 	dec, err := NewNavDecoder(strings.NewReader(navdata))
 	assert.NoError(err)
 
-	//dec.fastMode = true
+	// dec.fastMode = true
 
 	nEphs := 0
 	for dec.NextEphemeris() {
@@ -325,7 +326,7 @@ R22 2022 11 29 10 45 00 1.968629658222e-05 0.000000000000e+00 2.106300000000e+05
 	dec, err := NewNavDecoder(strings.NewReader(navdata))
 	assert.NoError(err)
 
-	//dec.fastMode = true
+	// dec.fastMode = true
 
 	nEphs := 0
 	for dec.NextEphemeris() {
